@@ -1,0 +1,19 @@
+<a href="/adm"><button class="btn">Voltar para o Home</button></a><br>
+<h1>Listar Equipamento</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Nome Do Equipamento</th>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each equipamentos}}
+    <tr>
+      <td>{{this.nome}}</td>
+      <td><a href="/delEquipamento/{{this.nome}}" onclick="return confirm('Tem certeza?')"><button class="btn">Deletar</button></a><br>
+       <a href="/editarEquipamento/{{this.id}}"><button class="btn">Editar</button></a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

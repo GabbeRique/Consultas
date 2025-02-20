@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta Peças</title>
+  <link rel="icon" type="image/x-icon" href="/favicon_io/android-chrome-512x512.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #e7f1fb;
+      /* Fundo em tom suave de azul */
+      color: #2a3d66;
+      /* Texto escuro, mas não tão agressivo */
+    }
+
+    .container {
+      padding: 30px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    header {
+      background-color: #005f87;
+      /* Azul mais forte para o topo */
+      color: white;
+      padding: 5px 0;
+      /* Reduzindo o padding para um espaço bem menor */
+      text-align: center;
+      font-size: 1em;
+      /* Font size menor */
+      border-radius: 8px 8px 0 0;
+    }
+
+
+    .card {
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #f0f9fc;
+    }
+
+    .card-content {
+      padding: 20px;
+      color: #3c4b70;
+    }
+
+    .btn {
+      background-color: #0071a1;
+      /* Azul com tom vibrante */
+      border-radius: 50px;
+      /* Bordas arredondadas */
+      padding: 10px 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background-color 0.3s, transform 0.3s ease;
+      border: none;
+      font-size: 14px;
+      /* Tamanho do texto ajustado para ser mais compacto */
+      display: flex;
+      /* Flexbox para centralizar o texto */
+      justify-content: center;
+      /* Centraliza horizontalmente */
+      align-items: center;
+      /* Centraliza verticalmente */
+    }
+
+    .btn:hover {
+      background-color: #005f87;
+      /* Azul mais escuro no hover */
+      transform: scale(1.05);
+    }
+
+    .btn:active {
+      background-color: #003f5c;
+      /* Azul ainda mais escuro ao clicar */
+      transform: scale(1);
+    }
+
+    .btn2 {
+      background-color: #0071a1;
+      color: #e7f1fb;
+      /* Azul com tom vibrante */
+      border-radius: 50px;
+      /* Bordas arredondadas */
+      padding: 10px 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background-color 0.3s, transform 0.3s ease;
+      border: none;
+      font-size: 14px;
+      /* Tamanho do texto ajustado para ser mais compacto */
+      display: flex;
+      /* Flexbox para centralizar o texto */
+      justify-content: center;
+      /* Centraliza horizontalmente */
+      align-items: center;
+      /* Centraliza verticalmente */
+    }
+
+    .btn2:hover {
+      background-color: #922004;
+      /* Azul mais escuro no hover */
+      transform: scale(1.05);
+    }
+
+    .btn2:active {
+      background-color: #f52323;
+      /* Azul ainda mais escuro ao clicar */
+      transform: scale(1);
+    }
+
+    .btn3 {
+      background-color: #0071a1;
+      color: #e7f1fb;
+      border-radius: 50px;
+      padding: 10px 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background-color 0.3s, transform 0.3s ease;
+      border: none;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      margin: 0 auto;
+      /* Isso centraliza o botão */
+    }
+
+    .btn3:hover {
+      background-color: #922004;
+      transform: scale(1.05);
+    }
+
+    .btn3:active {
+      background-color: #f52323;
+      transform: scale(1);
+    }
+
+
+    select {
+      display: block !important;
+      border: 1px solid #005f87;
+      /* Azul para o border */
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #f0f9fc;
+    }
+
+    footer {
+      background-color: #005f87;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      padding: 0 10px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.2em;
+        /* Tamanho do título menor em telas pequenas */
+      }
+
+      .btn {
+        font-size: 12px;
+        /* Botões menores em telas menores */
+        padding: 8px 12px;
+        /* Menor padding para os botões */
+      }
+
+      .container {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 1.1em;
+        /* Ajuste no título para telas bem pequenas */
+      }
+
+      .btn {
+        font-size: 11px;
+        /* Reduzir ainda mais o tamanho do botão */
+        padding: 6px 10px;
+        /* Padding reduzido */
+      }
+
+      label {
+        font-weight: bold;
+        font-size: 1rem;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #0071a1;
+        border-radius: 8px;
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      input::placeholder {
+        color: #aaa;
+        font-style: italic;
+      }
+
+      input:focus {
+        border-color: #004d75;
+        box-shadow: 0 0 8px rgba(0, 113, 161, 0.5);
+      }
+
+      footer {
+        background-color: #005f87;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        width: 100%;
+        margin-top: auto;
+        /* Faz o footer ficar sempre no final */
+      }
+
+      footer a {
+        color: white;
+        text-decoration: none;
+        padding: 0 10px;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+
+
+
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Consulta Peças</h1>
+
+  </header>
+  <div class="container">
+    {{{body}}}
+
+  </div><!-- VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+
+  </script>
+  <p>&copy; 2025 Consulta Peças. Todos os direitos reservados. Criador por Gabriel Costa. Idealizador: Eucris Costa.  <a href="#">Termos de uso</a> | <a href="#">Privacidade</a>
+    </div>
+
+
+
+</body>
+
+</html>

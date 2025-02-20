@@ -1,0 +1,21 @@
+<a href="/adm"><button class="btn">Voltar para o Home</button></a><br>
+<form action="/addPeca" method="POST">
+    <label for="equipamento_nome">Equipamento:</label>
+    <select id="equipamento_nome" name="equipamento_nome" required>
+        <option value="">Selecione um equipamento</option>
+        {{#each equipamentos}}
+        <option value="{{this.nome}}">{{this.nome}}</option>
+        {{/each}}
+    </select>
+
+    <br><label>Categoria:</label><br>
+    <select id="categoria" name="categoria" required>
+        <option value="">Selecione uma Categoria</option>
+        <option value="Elétrica">Elétrica</option>
+        <option value="Mecânica">Mecânica</option>
+        <option value="Diversos">Diversos</option>
+    </select>
+    <label>Nome da Peça: <input type="text" id="nome_peca" name="nome_peca" required></label><br>
+    <label>SAP: <input type="text" id="SAP" name="SAP" maxlength="5" required></label><br>
+    <button type="submit">Registrar</button>
+</form>
