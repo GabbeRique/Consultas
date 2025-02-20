@@ -1,16 +1,16 @@
 const express = require('express');
-const app = express();
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const db = require('./config/database');
 const path = require("path");
+require('dotenv').config(); // Carregar variáveis do arquivo .env
 
-
+const app = express();
 
 const Login = require('./model/login.model');
 const equipamento = require('./model/equipamento.model');
-const peca = require('./model/Peca.model'); // Corrigido o caminho
+const peca = require('./model/Peca.model');
 
 app.use(express.static('public'));
 
@@ -20,8 +20,9 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon_io', 'favicon.ico')));
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 app.use(session({
-    secret: 'seuSegredoAqui',
+    secret: process.env.SESSION_SECRET || 'chavePadrao', // Usa variável de ambiente ou um valor padrão
     resave: false,
     saveUninitialized: true
 }));
@@ -60,15 +61,11 @@ const tabelaPeca = require('./routes/tabelaPeca');
 const tabelaEquipamento = require('./routes/tabelaEquipamento');
 const delEquipamento = require('./routes/delEquipamento');
 const delPeca = require('./routes/delPeca');
-
 const editarEquipamento = require('./routes/editarEquipamento');
-app.use('/editarEquipamento', editarEquipamento);
 const editarPecaRouter = require('./routes/editarPeca');
+
+app.use('/editarEquipamento', editarEquipamento);
 app.use('/editarPeca', editarPecaRouter);
-
-
-
-
 app.use('/tabelaPeca', tabelaPeca);
 app.use('/tabelaEquipamento', tabelaEquipamento);
 app.use('/', indexFRoutes);
@@ -80,13 +77,8 @@ app.use('/addPeca', addpecaRoutes);
 app.use('/delEquipamento', delEquipamento);
 app.use('/delPeca', delPeca);
 
-
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-
-
 
 app.engine('handlebars', exphbs.engine({
     helpers: {
@@ -96,17 +88,8 @@ app.engine('handlebars', exphbs.engine({
     }
 }));
 
-
 app.set('view engine', 'handlebars');
-
 app.use(express.static(path.join(__dirname, "public")));
-
-// Usando method-override para suportar DELETE no formulário
-
-
-
-// Rota para deletar o equipamento pelo nome
-
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
